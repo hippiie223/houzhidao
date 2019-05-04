@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hippie.houzhidao.mapper.ExtMapper">
+    <select id="getAllTopicList" resultType="com.hippie.houzhidao.domain.TopicDTO">
+    select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from topic
+  </select>
+    <select id="getTopTopicList" resultType="com.hippie.houzhidao.domain.TopicDTO">
+    select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from topic
+    order by hits desc limit 10
+  </select>
+    <select id="getTopicDetail" resultType="com.hippie.houzhidao.domain.TopicDTO" parameterType="java.lang.String">
+    select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from topic
+    where title=#{title} and author_name=#{authorName}
+  </select>
+    <update id="updatePostNum" parameterType="java.lang.Integer">
+    update topic
+    set post_num=post_num+1
+    where id=#{topicId}
+  </update>
+  <update id="updatePostReplyNum" parameterType="java.lang.Integer">
+    update topic_post
+    set reply_num=reply_num+1
+    where id=#{postId}
+  </update>
+  <select id="getQAAllList" resultType="com.hippie.houzhidao.domain.QADTO">
+     select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,answer_num as reviewNum,create_time as createTime,author_name as author
+    from qa_question
+  </select>
+  <select id="getTopQAList" resultType="com.hippie.houzhidao.domain.QADTO">
+     select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,answer_num as reviewNum,create_time as createTime,author_name as author
+    from qa_question
+    order by hits desc limit 10
+  </select>
+  <select id="getQADetail" resultType="com.hippie.houzhidao.domain.QADTO" parameterType="java.lang.String">
+     select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,answer_num as reviewNum,create_time as createTime,author_name as author
+    from qa_question
+    where title=#{title} and author_name=#{authorName}
+  </select>
+  <update id="updateQAAnswerNum" parameterType="java.lang.Integer">
+    update qa_question
+    set answer_num=answer_num+1
+    where id=#{qAId}
+  </update>
+  <update id="updateQAAnswerReplyNum" parameterType="java.lang.Integer">
+    update qa_answer
+    set reply_num=reply_num+1
+    where id=#{answerId}
+  </update>
+
+</mapper>
+
