@@ -2,10 +2,9 @@ package com.hippie.houzhidao.mapper;
 
 import com.hippie.houzhidao.domain.UserInfo;
 import com.hippie.houzhidao.domain.example.UserInfoExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface UserInfoMapper {
     int countByExample(UserInfoExample example);

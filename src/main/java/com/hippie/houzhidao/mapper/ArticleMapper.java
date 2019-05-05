@@ -1,12 +1,10 @@
 package com.hippie.houzhidao.mapper;
 
 import com.hippie.houzhidao.domain.Article;
-import com.hippie.houzhidao.domain.ArticleDTO;
 import com.hippie.houzhidao.domain.example.ArticleExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface ArticleMapper {
     int countByExample(ArticleExample example);
@@ -30,16 +28,4 @@ public interface ArticleMapper {
     int updateByExampleWithBLOBs(@Param("record") Article record, @Param("example") ArticleExample example);
 
     int updateByExample(@Param("record") Article record, @Param("example") ArticleExample example);
-
-    List<ArticleDTO> getAllList();
-
-    List<ArticleDTO> getTopList();
-
-    List<ArticleDTO> searchArticle(@Param("keyWord") String keyWord);
-
-    List<ArticleDTO> getArticle(@Param("title") String title, @Param("authorName") String authorName);
-
-    List<ArticleDTO> getArticleByAuthor(@Param("authorName") String authorName);
-
-    int updatePostNum(@Param("articleId") Integer articleId);
 }

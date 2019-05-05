@@ -40,12 +40,15 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleSortMapper articleSortMapper;
 
+    @Autowired
+    private ExtMapper extMapper;
+
 
     @Override
     public List<ArticleRespBody> getAllArticleList(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
 
-        return articleMapper.getAllList().parallelStream().map(articleDTO -> {
+        return extMapper.getAllArticleList().parallelStream().map(articleDTO -> {
             ArticleRespBody articleRespBody = new ArticleRespBody();
             articleRespBody.setId(articleDTO.getId());
             articleRespBody.setTitle(articleDTO.getTitle());
@@ -61,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleRespBody> getTopList() {
-        return articleMapper.getTopList().parallelStream().map(articleDTO -> {
+        return extMapper.getTopArticleList().parallelStream().map(articleDTO -> {
             ArticleRespBody articleRespBody = new ArticleRespBody();
             articleRespBody.setId(articleDTO.getId());
             articleRespBody.setTitle(articleDTO.getTitle());
@@ -83,7 +86,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleRespBody> getSearchList(String keyWord, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return articleMapper.searchArticle(keyWord).parallelStream().map(articleDTO -> {
+        return extMapper.searchArticle(keyWord).parallelStream().map(articleDTO -> {
             ArticleRespBody articleRespBody = new ArticleRespBody();
             articleRespBody.setId(articleDTO.getId());
             articleRespBody.setTitle(articleDTO.getTitle());
@@ -99,7 +102,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleRespBody> getArticleDetail(String title, String authorName) {
-        return articleMapper.getArticle(title, authorName).parallelStream().map(articleDTO -> {
+        return extMapper.getArticle(title, authorName).parallelStream().map(articleDTO -> {
             ArticleRespBody articleRespBody = new ArticleRespBody();
             articleRespBody.setId(articleDTO.getId());
             articleRespBody.setTitle(articleDTO.getTitle());
@@ -115,7 +118,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleRespBody> getArticleByAuthor(String authorName) {
-        return articleMapper.getArticleByAuthor(authorName).parallelStream().map(articleDTO -> {
+        return extMapper.getArticleByAuthor(authorName).parallelStream().map(articleDTO -> {
             ArticleRespBody articleRespBody = new ArticleRespBody();
             articleRespBody.setId(articleDTO.getId());
             articleRespBody.setTitle(articleDTO.getTitle());
@@ -137,7 +140,7 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = new Article();
         article.setLastPostTime(TimeUtil.getCurrentTime());
         articleMapper.updateByExampleSelective(article, example);
-        articleMapper.updatePostNum(articlePost.getArticleId());
+        extMapper.updateArticlePostNum(articlePost.getArticleId());
 
         articlePostMapper.insertSelective(articlePost);
     }

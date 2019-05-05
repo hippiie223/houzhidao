@@ -13,6 +13,7 @@
     <result column="last_post_time" property="lastPostTime" jdbcType="TIMESTAMP" />
     <result column="post_num" property="postNum" jdbcType="INTEGER" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="is_checked" property="isChecked" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.hippie.houzhidao.domain.Article" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, article_sort_id, title, author_name, hits, recommend_num, create_time, update_time, 
-    last_post_time, post_num, img_url
+    last_post_time, post_num, img_url, is_checked
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -124,13 +125,13 @@
     insert into article (id, article_sort_id, title, 
       author_name, hits, recommend_num, 
       create_time, update_time, last_post_time, 
-      post_num, img_url, content
-      )
+      post_num, img_url, is_checked, 
+      content)
     values (#{id,jdbcType=INTEGER}, #{articleSortId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
       #{authorName,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{recommendNum,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{lastPostTime,jdbcType=TIMESTAMP}, 
-      #{postNum,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
-      )
+      #{postNum,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}, #{isChecked,jdbcType=BIT}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hippie.houzhidao.domain.Article" >
     insert into article
@@ -167,6 +168,9 @@
       </if>
       <if test="imgUrl != null" >
         img_url,
+      </if>
+      <if test="isChecked != null" >
+        is_checked,
       </if>
       <if test="content != null" >
         content,
@@ -205,6 +209,9 @@
       </if>
       <if test="imgUrl != null" >
         #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isChecked != null" >
+        #{isChecked,jdbcType=BIT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -253,6 +260,9 @@
       <if test="record.imgUrl != null" >
         img_url = #{record.imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.isChecked != null" >
+        is_checked = #{record.isChecked,jdbcType=BIT},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -274,6 +284,7 @@
       last_post_time = #{record.lastPostTime,jdbcType=TIMESTAMP},
       post_num = #{record.postNum,jdbcType=INTEGER},
       img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      is_checked = #{record.isChecked,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -291,7 +302,8 @@
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       last_post_time = #{record.lastPostTime,jdbcType=TIMESTAMP},
       post_num = #{record.postNum,jdbcType=INTEGER},
-      img_url = #{record.imgUrl,jdbcType=VARCHAR}
+      img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      is_checked = #{record.isChecked,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -328,37 +340,4 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="getAllList" resultType="com.hippie.houzhidao.domain.ArticleDTO">
-    select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from article
-  </select>
-  <select id="getTopList" resultType="com.hippie.houzhidao.domain.ArticleDTO">
-    select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from article order by hits desc limit 10
-  </select>
-  <select id="searchArticle" resultType="com.hippie.houzhidao.domain.ArticleDTO" parameterType="java.lang.String">
-    select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from article
-    where title like CONCAT('%',#{keyWord},'%')
-  </select>
-  <select id="getArticle" resultType="com.hippie.houzhidao.domain.ArticleDTO" parameterType="java.lang.String">
-     select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from article
-    where title=#{title} and author_name=#{authorName}
-  </select>
-  <select id="getArticleByAuthor" resultType="com.hippie.houzhidao.domain.ArticleDTO" parameterType="java.lang.String">
-     select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from article
-    where author_name=#{authorName}
-  </select>
-  <update id="updatePostNum" parameterType="java.lang.Integer">
-    update article
-    set post_num=post_num+1
-    where id=#{articleId}
-  </update>
 </mapper>

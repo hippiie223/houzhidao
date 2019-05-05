@@ -55,6 +55,40 @@
     set reply_num=reply_num+1
     where id=#{answerId}
   </update>
+  <select id="getAllArticleList" resultType="com.hippie.houzhidao.domain.ArticleDTO">
+    select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from article
+  </select>
+  <select id="getTopArticleList" resultType="com.hippie.houzhidao.domain.ArticleDTO">
+    select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from article order by hits desc limit 10
+  </select>
+  <select id="searchArticle" resultType="com.hippie.houzhidao.domain.ArticleDTO" parameterType="java.lang.String">
+    select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from article
+    where title like CONCAT('%',#{keyWord},'%')
+  </select>
+  <select id="getArticle" resultType="com.hippie.houzhidao.domain.ArticleDTO" parameterType="java.lang.String">
+     select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from article
+    where title=#{title} and author_name=#{authorName}
+  </select>
+  <select id="getArticleByAuthor" resultType="com.hippie.houzhidao.domain.ArticleDTO" parameterType="java.lang.String">
+     select
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    from article
+    where author_name=#{authorName}
+  </select>
+  <update id="updateArticlePostNum" parameterType="java.lang.Integer">
+    update article
+    set post_num=post_num+1
+    where id=#{articleId}
+  </update>
+
 
 </mapper>
 

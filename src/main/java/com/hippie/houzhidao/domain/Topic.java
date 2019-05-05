@@ -23,6 +23,8 @@ public class Topic {
 
     private String authorName;
 
+    private Boolean isChecked;
+
     private String content;
 
     public Integer getId() {
@@ -103,6 +105,14 @@ public class Topic {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
+    }
+
+    public Boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(Boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
     public String getContent() {

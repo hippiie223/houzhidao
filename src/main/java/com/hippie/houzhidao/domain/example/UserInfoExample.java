@@ -735,52 +735,52 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminEqualTo(Integer value) {
+        public Criteria andIsAdminEqualTo(Boolean value) {
             addCriterion("is_admin =", value, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminNotEqualTo(Integer value) {
+        public Criteria andIsAdminNotEqualTo(Boolean value) {
             addCriterion("is_admin <>", value, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminGreaterThan(Integer value) {
+        public Criteria andIsAdminGreaterThan(Boolean value) {
             addCriterion("is_admin >", value, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIsAdminGreaterThanOrEqualTo(Boolean value) {
             addCriterion("is_admin >=", value, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminLessThan(Integer value) {
+        public Criteria andIsAdminLessThan(Boolean value) {
             addCriterion("is_admin <", value, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminLessThanOrEqualTo(Integer value) {
+        public Criteria andIsAdminLessThanOrEqualTo(Boolean value) {
             addCriterion("is_admin <=", value, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminIn(List<Integer> values) {
+        public Criteria andIsAdminIn(List<Boolean> values) {
             addCriterion("is_admin in", values, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminNotIn(List<Integer> values) {
+        public Criteria andIsAdminNotIn(List<Boolean> values) {
             addCriterion("is_admin not in", values, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminBetween(Integer value1, Integer value2) {
+        public Criteria andIsAdminBetween(Boolean value1, Boolean value2) {
             addCriterion("is_admin between", value1, value2, "isAdmin");
             return (Criteria) this;
         }
 
-        public Criteria andIsAdminNotBetween(Integer value1, Integer value2) {
+        public Criteria andIsAdminNotBetween(Boolean value1, Boolean value2) {
             addCriterion("is_admin not between", value1, value2, "isAdmin");
             return (Criteria) this;
         }
@@ -972,6 +972,76 @@ public class UserInfoExample {
 
         public Criteria andUpdateTimeNotBetween(Date value1, Date value2) {
             addCriterion("update_time not between", value1, value2, "updateTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlIsNull() {
+            addCriterion("img_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlIsNotNull() {
+            addCriterion("img_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlEqualTo(String value) {
+            addCriterion("img_url =", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotEqualTo(String value) {
+            addCriterion("img_url <>", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlGreaterThan(String value) {
+            addCriterion("img_url >", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("img_url >=", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlLessThan(String value) {
+            addCriterion("img_url <", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlLessThanOrEqualTo(String value) {
+            addCriterion("img_url <=", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlLike(String value) {
+            addCriterion("img_url like", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotLike(String value) {
+            addCriterion("img_url not like", value, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlIn(List<String> values) {
+            addCriterion("img_url in", values, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotIn(List<String> values) {
+            addCriterion("img_url not in", values, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlBetween(String value1, String value2) {
+            addCriterion("img_url between", value1, value2, "imgUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgUrlNotBetween(String value1, String value2) {
+            addCriterion("img_url not between", value1, value2, "imgUrl");
             return (Criteria) this;
         }
     }

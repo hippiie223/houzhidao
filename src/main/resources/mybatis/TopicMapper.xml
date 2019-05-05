@@ -12,6 +12,7 @@
     <result column="hits" property="hits" jdbcType="INTEGER" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
     <result column="author_name" property="authorName" jdbcType="VARCHAR" />
+    <result column="is_checked" property="isChecked" jdbcType="BIT" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.hippie.houzhidao.domain.Topic" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
@@ -76,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, topic_sort_id, title, create_time, update_time, last_post_time, post_num, hits, 
-    img_url, author_name
+    img_url, author_name, is_checked
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -123,11 +124,13 @@
     insert into topic (id, topic_sort_id, title, 
       create_time, update_time, last_post_time, 
       post_num, hits, img_url, 
-      author_name, content)
+      author_name, is_checked, content
+      )
     values (#{id,jdbcType=INTEGER}, #{topicSortId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{lastPostTime,jdbcType=TIMESTAMP}, 
       #{postNum,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR}, 
-      #{authorName,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+      #{authorName,jdbcType=VARCHAR}, #{isChecked,jdbcType=BIT}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hippie.houzhidao.domain.Topic" >
     insert into topic
@@ -161,6 +164,9 @@
       </if>
       <if test="authorName != null" >
         author_name,
+      </if>
+      <if test="isChecked != null" >
+        is_checked,
       </if>
       <if test="content != null" >
         content,
@@ -196,6 +202,9 @@
       </if>
       <if test="authorName != null" >
         #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="isChecked != null" >
+        #{isChecked,jdbcType=BIT},
       </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
@@ -241,6 +250,9 @@
       <if test="record.authorName != null" >
         author_name = #{record.authorName,jdbcType=VARCHAR},
       </if>
+      <if test="record.isChecked != null" >
+        is_checked = #{record.isChecked,jdbcType=BIT},
+      </if>
       <if test="record.content != null" >
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -261,6 +273,7 @@
       hits = #{record.hits,jdbcType=INTEGER},
       img_url = #{record.imgUrl,jdbcType=VARCHAR},
       author_name = #{record.authorName,jdbcType=VARCHAR},
+      is_checked = #{record.isChecked,jdbcType=BIT},
       content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -277,7 +290,8 @@
       post_num = #{record.postNum,jdbcType=INTEGER},
       hits = #{record.hits,jdbcType=INTEGER},
       img_url = #{record.imgUrl,jdbcType=VARCHAR},
-      author_name = #{record.authorName,jdbcType=VARCHAR}
+      author_name = #{record.authorName,jdbcType=VARCHAR},
+      is_checked = #{record.isChecked,jdbcType=BIT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -313,16 +327,5 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-  </select>
-  <select id="getAllList" resultType="com.hippie.houzhidao.domain.TopicDTO">
-    select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from topic
-  </select>
-  <select id="getTopList" resultType="com.hippie.houzhidao.domain.TopicDTO">
-    select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
-    from topic
-    order by hits desc limit 10
   </select>
 </mapper>

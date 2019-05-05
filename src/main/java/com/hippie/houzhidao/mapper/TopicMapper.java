@@ -1,12 +1,10 @@
 package com.hippie.houzhidao.mapper;
 
 import com.hippie.houzhidao.domain.Topic;
-import com.hippie.houzhidao.domain.TopicDTO;
 import com.hippie.houzhidao.domain.example.TopicExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
-
-import java.util.List;
 
 public interface TopicMapper {
     int countByExample(TopicExample example);
@@ -30,8 +28,4 @@ public interface TopicMapper {
     int updateByExampleWithBLOBs(@Param("record") Topic record, @Param("example") TopicExample example);
 
     int updateByExample(@Param("record") Topic record, @Param("example") TopicExample example);
-
-    List<TopicDTO> getAllList();
-
-    List<TopicDTO> getTopList();
 }

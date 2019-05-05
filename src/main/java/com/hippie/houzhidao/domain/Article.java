@@ -25,6 +25,8 @@ public class Article {
 
     private String imgUrl;
 
+    private Boolean isChecked;
+
     private String content;
 
     public Integer getId() {
@@ -113,6 +115,14 @@ public class Article {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setIsChecked(Boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
     public String getContent() {

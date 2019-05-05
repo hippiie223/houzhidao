@@ -1,6 +1,7 @@
 package com.hippie.houzhidao.mapper;
 
 
+import com.hippie.houzhidao.domain.ArticleDTO;
 import com.hippie.houzhidao.domain.QADTO;
 import com.hippie.houzhidao.domain.TopicDTO;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,15 @@ public interface ExtMapper {
     List<QADTO> getQADetail(@Param("title") String title, @Param("authorName") String authorName);
     int updateQAAnswerNum(@Param("qAId") Integer qAId);
     int updateQAAnswerReplyNum(@Param("answerId") Integer answerId);
+    List<ArticleDTO> getAllArticleList();
+
+    List<ArticleDTO> getTopArticleList();
+
+    List<ArticleDTO> searchArticle(@Param("keyWord") String keyWord);
+
+    List<ArticleDTO> getArticle(@Param("title") String title, @Param("authorName") String authorName);
+
+    List<ArticleDTO> getArticleByAuthor(@Param("authorName") String authorName);
+
+    int updateArticlePostNum(@Param("articleId") Integer articleId);
 }

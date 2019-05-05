@@ -1,8 +1,5 @@
 package com.hippie.houzhidao.domain;
 
-import com.hippie.houzhidao.util.CreateTime;
-import com.hippie.houzhidao.util.UpdateTime;
-
 import java.util.Date;
 
 public class UserInfo {
@@ -24,15 +21,15 @@ public class UserInfo {
 
     private String phone;
 
-    private Integer isAdmin;
+    private Boolean isAdmin;
 
     private String password;
 
-    @CreateTime
     private Date createTime;
 
-    @UpdateTime
     private Date updateTime;
+
+    private String imgUrl;
 
     public String getUserName() {
         return userName;
@@ -106,11 +103,11 @@ public class UserInfo {
         this.phone = phone;
     }
 
-    public Integer getIsAdmin() {
+    public Boolean getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(Integer isAdmin) {
+    public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 
@@ -136,5 +133,13 @@ public class UserInfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }
