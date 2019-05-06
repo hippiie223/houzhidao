@@ -6,13 +6,13 @@ spring:
     name: houzhidao
   datasource:
       name: test
-      url: jdbc:mysql://39.106.200.100:3306/gpp?useSSL=false&useUnicode=true&characterEncoding=UTF-8
-      username: wbw
-      password: WANGbowen0223.
+      url: jdbc:mysql://114.115.212.95:3306/houzhidao?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: root
+      password: WANGbowen0223!
       driver-class-name: com.mysql.jdbc.Driver
       hikari:
-        maxLifetime: 1800000 #一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少30秒以上
-        maximumPoolSize: 15 #连接池中允许的最大连接数。缺省值：10；推荐的公式：
+        maxLifetime: 1800000 #一锟斤拷锟斤拷锟接碉拷锟斤拷锟斤拷时锟斤拷锟斤拷锟斤拷锟诫）锟斤拷锟斤拷时锟斤拷锟斤拷没锟斤拷使锟斤拷锟斤拷锟酵放ｏ拷retired锟斤拷锟斤拷缺省:30锟斤拷锟接ｏ拷锟斤拷锟斤拷锟斤拷锟矫憋拷锟斤拷锟捷库超时时锟斤拷锟斤拷30锟斤拷锟斤拷锟斤拷
+        maximumPoolSize: 15 #锟斤拷锟接筹拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷缺省值锟斤拷10锟斤拷锟狡硷拷锟侥癸拷式锟斤拷
 
 
 ribbon:
