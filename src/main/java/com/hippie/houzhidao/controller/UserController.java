@@ -38,15 +38,16 @@ public class UserController {
 
     @GetMapping(path = "/code")
     @ApiOperation("获取验证码")
-    public RootRespBody getCode(@RequestParam String phone){
+    public String getCode(@RequestParam String phone){
+        String response = null;
 
         try {
-            String response = SendCode.send(phone);
-            return RootRespBody.success(response);
+            response = SendCode.send(phone);
+
         } catch (Exception e) {
             logger.error("发送验证码错误!");
         }
-        return RootRespBody.success();
+        return response;
     }
 
     @PostMapping(path = "/insert")
