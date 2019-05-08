@@ -3,12 +3,13 @@ package com.hippie.houzhidao.controller;
 import com.hippie.houzhidao.domain.UserInfo;
 import com.hippie.houzhidao.message.SendCode;
 import com.hippie.houzhidao.request.InsertUserRequestBody;
-import com.hippie.houzhidao.request.LoginRequestBody;
 import com.hippie.houzhidao.request.UpdateUserInfoRequestBody;
+import com.hippie.houzhidao.respbody.CodeRespBody;
 import com.hippie.houzhidao.respbody.RootRespBody;
 import com.hippie.houzhidao.respbody.UserInfoRespBody;
 import com.hippie.houzhidao.service.UserService;
 import com.hippie.houzhidao.util.CheckSumBuilder;
+import com.hippie.houzhidao.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
@@ -38,16 +39,20 @@ public class UserController {
 
     @GetMapping(path = "/code")
     @ApiOperation("获取验证码")
-    public String getCode(@RequestParam String phone){
+    public RootRespBody getCode(@RequestParam String phone){
         String response = null;
 
         try {
             response = SendCode.send(phone);
-
         } catch (Exception e) {
             logger.error("发送验证码错误!");
         }
-        return response;
+        CodeRespBody codeRespBody = StringUtil.getProperties(response);
+        if("200".equals(codeRespBody.getStatus())){
+            return RootRespBody.success(codeRespBody.getCode());
+        }else {
+            return RootRespBody.failure(RootRespBody.Status.INVALID_PARAM,codeRespBody.getMsg());
+        }
     }
 
     @PostMapping(path = "/insert")
