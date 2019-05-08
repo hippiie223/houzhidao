@@ -37,4 +37,8 @@ public interface ExtMapper {
     List<ArticleDTO> getArticleByAuthor(@Param("authorName") String authorName);
 
     int updateArticlePostNum(@Param("articleId") Integer articleId);
+
+    List<String> getUserRoles(@Param("userName") String userName);
+
+    int updateUserSalt(@Param("userName") String userName);
 }

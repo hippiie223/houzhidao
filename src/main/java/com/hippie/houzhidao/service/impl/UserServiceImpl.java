@@ -5,6 +5,7 @@ import com.hippie.houzhidao.domain.FocusAndFans;
 import com.hippie.houzhidao.domain.UserInfo;
 import com.hippie.houzhidao.domain.example.FocusAndFansExample;
 import com.hippie.houzhidao.domain.example.UserInfoExample;
+import com.hippie.houzhidao.mapper.ExtMapper;
 import com.hippie.houzhidao.mapper.FocusAndFansMapper;
 import com.hippie.houzhidao.mapper.UserInfoMapper;
 import com.hippie.houzhidao.mapper.UsersMapper;
@@ -12,6 +13,8 @@ import com.hippie.houzhidao.request.UpdateUserInfoRequestBody;
 import com.hippie.houzhidao.respbody.UserInfoRespBody;
 import com.hippie.houzhidao.service.UserService;
 import com.hippie.houzhidao.util.CheckSumBuilder;
+import com.hippie.houzhidao.util.JwtUtils;
+import com.hippie.houzhidao.util.MathUtil;
 import com.hippie.houzhidao.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private FocusAndFansMapper focusAndFansMapper;
+
+    @Autowired
+    private ExtMapper extMapper;
 
     @Override
     public void insertUser(UserInfo users) {
@@ -130,7 +136,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoRespBody getUserInfo(String userName) {
+    public UserInfoRespBody getUser(String userName) {
         UserInfoExample userInfoExample = new UserInfoExample();
         userInfoExample.createCriteria().andUserNameEqualTo(userName);
         UserInfo userInfo = userInfoMapper.selectByExample(userInfoExample).get(0);
@@ -172,5 +178,45 @@ public class UserServiceImpl implements UserService {
         FocusAndFansExample example = new FocusAndFansExample();
         example.createCriteria().andFocusEqualTo(userName).andFansEqualTo(fansUserName);
         return focusAndFansMapper.deleteByExample(example) == 1;
+    }
+
+    @Override
+    public UserInfo getUserInfo(String userName) {
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample.createCriteria().andUserNameEqualTo(userName);
+        return userInfoMapper.selectByExample(userInfoExample).get(0);
+    }
+
+    @Override
+    public List<String> getUserRoles(String userName) {
+        return extMapper.getUserRoles(userName);
+    }
+
+    @Override
+    public String generateJwtToken(String userName) {
+        String salt = MathUtil.getRandomCode();
+
+        //将salt存入数据库
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample.createCriteria().andUserNameEqualTo(userName);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setSalt(salt);
+        userInfoMapper.updateByExampleSelective(userInfo, userInfoExample);
+        return JwtUtils.sign(userName, salt, 1800);
+    }
+
+    @Override
+    public UserInfo getJwtTokenInfo(String userName) {
+        return getUserInfo(userName);
+    }
+
+    @Override
+    public void deleteLoginInfo(String userName) {
+//        UserInfoExample example = new UserInfoExample();
+//        example.createCriteria().andUserNameEqualTo(userName);
+//        UserInfo userInfo = new UserInfo();
+//        userInfo.setSalt("");
+//        userInfoMapper.updateByExampleSelective(userInfo, example);
+        extMapper.updateUserSalt(userName);
     }
 }

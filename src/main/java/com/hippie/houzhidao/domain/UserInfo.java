@@ -31,6 +31,8 @@ public class UserInfo {
 
     private String imgUrl;
 
+    private String salt;
+
     public String getUserName() {
         return userName;
     }
@@ -141,5 +143,13 @@ public class UserInfo {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

@@ -17,11 +17,16 @@ public interface UserService {
     boolean updatePassword(String userName, String oldPassword, String newPassword);
     boolean isNameExist(String name);
     boolean userFocus(String userName, String focusUserName);
-    UserInfoRespBody getUserInfo(String userName);
+    UserInfoRespBody getUser(String userName);
     void updateUserInfo(UpdateUserInfoRequestBody requestBody);
     List<String> getFocusList(String userName, int pageNum, int pageSize);
     List<String> getFansList(String userName, int pageNum, int pageSize);
     boolean deleteFocus(String userName, String focusUserName);
     boolean deleteFans(String userName, String fansUserName);
+    UserInfo getUserInfo(String userName);
+    List<String> getUserRoles(String userName);
+    String generateJwtToken(String userName);
+    UserInfo getJwtTokenInfo(String userName);
+    void deleteLoginInfo(String userName);
 
 }

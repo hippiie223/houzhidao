@@ -16,6 +16,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     user_name, id, gender, email, address, job, school, signature, phone, is_admin, password, 
-    create_time, update_time, img_url
+    create_time, update_time, img_url, salt
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" >
     select
@@ -105,12 +106,14 @@
       email, address, job, 
       school, signature, phone, 
       is_admin, password, create_time, 
-      update_time, img_url)
+      update_time, img_url, salt
+      )
     values (#{userName,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, #{gender,jdbcType=CHAR}, 
       #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
       #{school,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{isAdmin,jdbcType=BIT}, #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR})
+      #{updateTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hippie.houzhidao.domain.UserInfo" >
     insert into user_info
@@ -157,6 +160,9 @@
       <if test="imgUrl != null" >
         img_url,
       </if>
+      <if test="salt != null" >
+        salt,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userName != null" >
@@ -200,6 +206,9 @@
       </if>
       <if test="imgUrl != null" >
         #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -254,6 +263,9 @@
       <if test="record.imgUrl != null" >
         img_url = #{record.imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="record.salt != null" >
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -274,7 +286,8 @@
       password = #{record.password,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      img_url = #{record.imgUrl,jdbcType=VARCHAR}
+      img_url = #{record.imgUrl,jdbcType=VARCHAR},
+      salt = #{record.salt,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

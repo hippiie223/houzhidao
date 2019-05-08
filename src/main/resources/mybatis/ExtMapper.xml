@@ -88,6 +88,17 @@
     set post_num=post_num+1
     where id=#{articleId}
   </update>
+    <select id="getUserRoles" resultType="java.lang.String" parameterType="java.lang.String">
+    select
+    role
+    from user_role
+    where user_name=#{userName}
+  </select>
+    <update id="updateUserSalt" parameterType="java.lang.String">
+    update user_info
+    set salt=''
+    where user_name=#{userName}
+  </update>
 
 
 

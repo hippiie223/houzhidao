@@ -11,11 +11,17 @@ import com.hippie.houzhidao.service.UserService;
 import com.hippie.houzhidao.util.CheckSumBuilder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -76,11 +82,21 @@ public class UserController {
 
     @PostMapping(path = "/login")
     @ApiOperation("用户登录")
-    public RootRespBody login(@RequestBody LoginRequestBody loginRequestBody){
-        if(userService.login(loginRequestBody.getUsername(), loginRequestBody.getPassword())){
-            return RootRespBody.success();
+    public RootRespBody<String> login(@RequestParam String userName, @RequestParam String password, HttpServletRequest request, HttpServletResponse response){
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(userName, CheckSumBuilder.getMD5(password));
+            subject.login(token);
+
+            UserInfo userInfo = (UserInfo)subject.getPrincipal();
+            String newToken = userService.generateJwtToken(userInfo.getUserName());
+            response.setHeader("x-token", newToken);
+            return RootRespBody.success(newToken);
+        } catch (AuthenticationException e){
+            return RootRespBody.failure(RootRespBody.Status.BAD_REQUEST,"密码错误");
+        } catch (Exception e){
+            return RootRespBody.failure(RootRespBody.Status.PERMISSION_DENIED_ERROR, e.toString());
         }
-        return RootRespBody.failure(RootRespBody.Status.REQUEST_PARAMETER_ERROR,"密码错误！");
     }
 
     @GetMapping(path = "/is/username/exist")
@@ -106,7 +122,7 @@ public class UserController {
     @GetMapping(path = "/get/user/info")
     @ApiOperation("获取用户个人信息")
     public RootRespBody<UserInfoRespBody> getUserInfo(@RequestParam String userName){
-        return RootRespBody.success(userService.getUserInfo(userName));
+        return RootRespBody.success(userService.getUser(userName));
     }
 
     @PostMapping(path = "edit/user/info")
