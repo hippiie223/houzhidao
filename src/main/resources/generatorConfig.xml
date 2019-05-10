@@ -45,7 +45,7 @@
 
 
         <!--对应数据库表名 -->
-        <table tableName="user_role" enableCountByExample="true" enableUpdateByExample="true"
+        <table tableName="user_info" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="false">
             <!--<generatedKey column="id" sqlStatement="MySql" identity="true" />-->

@@ -3,18 +3,18 @@
 <mapper namespace="com.hippie.houzhidao.mapper.ExtMapper">
     <select id="getAllTopicList" resultType="com.hippie.houzhidao.domain.TopicDTO">
     select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author,start_time as startTime,end_time as endTime
     from topic
   </select>
     <select id="getTopTopicList" resultType="com.hippie.houzhidao.domain.TopicDTO">
     select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author,start_time as startTime,end_time as endTime
     from topic
     order by hits desc limit 10
   </select>
     <select id="getTopicDetail" resultType="com.hippie.houzhidao.domain.TopicDTO" parameterType="java.lang.String">
     select
-    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author
+    id as id,title as title,img_url as pic,content as content,hits as viewNum,post_num as reviewNum,create_time as createTime,author_name as author,start_time as startTime,end_time as endTime
     from topic
     where title=#{title} and author_name=#{authorName}
   </select>

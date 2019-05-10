@@ -1,42 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.hippie.houzhidao.mapper.UserInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.hippie.houzhidao.domain.UserInfo" >
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="id" property="id" jdbcType="INTEGER" />
-    <result column="gender" property="gender" jdbcType="CHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="job" property="job" jdbcType="VARCHAR" />
-    <result column="school" property="school" jdbcType="VARCHAR" />
-    <result column="signature" property="signature" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="is_admin" property="isAdmin" jdbcType="BIT" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
-    <result column="salt" property="salt" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hippie.houzhidao.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hippie.houzhidao.domain.UserInfo">
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="gender" jdbcType="BIT" property="gender" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="organize" jdbcType="VARCHAR" property="organize" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="is_admin" jdbcType="BIT" property="isAdmin" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -47,25 +47,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -76,210 +76,210 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
-    user_name, id, gender, email, address, job, school, signature, phone, is_admin, password, 
-    create_time, update_time, img_url, salt
+  <sql id="Base_Column_List">
+    user_name, id, gender, email, address, job, organize, signature, phone, is_admin, 
+    password, create_time, update_time, img_url, salt
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" >
+  <select id="selectByExample" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
     from user_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" >
+  <delete id="deleteByExample" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample">
     delete from user_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.hippie.houzhidao.domain.UserInfo" >
+  <insert id="insert" parameterType="com.hippie.houzhidao.domain.UserInfo">
     insert into user_info (user_name, id, gender, 
       email, address, job, 
-      school, signature, phone, 
+      organize, signature, phone, 
       is_admin, password, create_time, 
       update_time, img_url, salt
       )
-    values (#{userName,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, #{gender,jdbcType=CHAR}, 
+    values (#{userName,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER}, #{gender,jdbcType=BIT}, 
       #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
-      #{school,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{organize,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{isAdmin,jdbcType=BIT}, #{password,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{imgUrl,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hippie.houzhidao.domain.UserInfo" >
+  <insert id="insertSelective" parameterType="com.hippie.houzhidao.domain.UserInfo">
     insert into user_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userName != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
         user_name,
       </if>
-      <if test="id != null" >
+      <if test="id != null">
         id,
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         gender,
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         email,
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         address,
       </if>
-      <if test="job != null" >
+      <if test="job != null">
         job,
       </if>
-      <if test="school != null" >
-        school,
+      <if test="organize != null">
+        organize,
       </if>
-      <if test="signature != null" >
+      <if test="signature != null">
         signature,
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         phone,
       </if>
-      <if test="isAdmin != null" >
+      <if test="isAdmin != null">
         is_admin,
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
-      <if test="imgUrl != null" >
+      <if test="imgUrl != null">
         img_url,
       </if>
-      <if test="salt != null" >
+      <if test="salt != null">
         salt,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userName != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="id != null" >
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="gender != null" >
-        #{gender,jdbcType=CHAR},
+      <if test="gender != null">
+        #{gender,jdbcType=BIT},
       </if>
-      <if test="email != null" >
+      <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
+      <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-      <if test="job != null" >
+      <if test="job != null">
         #{job,jdbcType=VARCHAR},
       </if>
-      <if test="school != null" >
-        #{school,jdbcType=VARCHAR},
+      <if test="organize != null">
+        #{organize,jdbcType=VARCHAR},
       </if>
-      <if test="signature != null" >
+      <if test="signature != null">
         #{signature,jdbcType=VARCHAR},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="isAdmin != null" >
+      <if test="isAdmin != null">
         #{isAdmin,jdbcType=BIT},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="imgUrl != null" >
+      <if test="imgUrl != null">
         #{imgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="salt != null" >
+      <if test="salt != null">
         #{salt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" resultType="java.lang.Long">
     select count(*) from user_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update user_info
-    <set >
-      <if test="record.userName != null" >
+    <set>
+      <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
       </if>
-      <if test="record.id != null" >
+      <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.gender != null" >
-        gender = #{record.gender,jdbcType=CHAR},
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=BIT},
       </if>
-      <if test="record.email != null" >
+      <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.address != null" >
+      <if test="record.address != null">
         address = #{record.address,jdbcType=VARCHAR},
       </if>
-      <if test="record.job != null" >
+      <if test="record.job != null">
         job = #{record.job,jdbcType=VARCHAR},
       </if>
-      <if test="record.school != null" >
-        school = #{record.school,jdbcType=VARCHAR},
+      <if test="record.organize != null">
+        organize = #{record.organize,jdbcType=VARCHAR},
       </if>
-      <if test="record.signature != null" >
+      <if test="record.signature != null">
         signature = #{record.signature,jdbcType=VARCHAR},
       </if>
-      <if test="record.phone != null" >
+      <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
       </if>
-      <if test="record.isAdmin != null" >
+      <if test="record.isAdmin != null">
         is_admin = #{record.isAdmin,jdbcType=BIT},
       </if>
-      <if test="record.password != null" >
+      <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null" >
+      <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null" >
+      <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.imgUrl != null" >
+      <if test="record.imgUrl != null">
         img_url = #{record.imgUrl,jdbcType=VARCHAR},
       </if>
-      <if test="record.salt != null" >
+      <if test="record.salt != null">
         salt = #{record.salt,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update user_info
     set user_name = #{record.userName,jdbcType=VARCHAR},
       id = #{record.id,jdbcType=INTEGER},
-      gender = #{record.gender,jdbcType=CHAR},
+      gender = #{record.gender,jdbcType=BIT},
       email = #{record.email,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
       job = #{record.job,jdbcType=VARCHAR},
-      school = #{record.school,jdbcType=VARCHAR},
+      organize = #{record.organize,jdbcType=VARCHAR},
       signature = #{record.signature,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       is_admin = #{record.isAdmin,jdbcType=BIT},
@@ -288,22 +288,22 @@
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       img_url = #{record.imgUrl,jdbcType=VARCHAR},
       salt = #{record.salt,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <select resultMap="BaseResultMap" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" id="selectByExampleWithRowbounds" >
+  <select id="selectByExampleWithRowbounds" parameterType="com.hippie.houzhidao.domain.example.UserInfoExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
     from user_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>

@@ -25,6 +25,10 @@ public class Topic {
 
     private Boolean isChecked;
 
+    private Date endTime;
+
+    private Date startTime;
+
     private String content;
 
     public Integer getId() {
@@ -113,6 +117,22 @@ public class Topic {
 
     public void setIsChecked(Boolean isChecked) {
         this.isChecked = isChecked;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     public String getContent() {

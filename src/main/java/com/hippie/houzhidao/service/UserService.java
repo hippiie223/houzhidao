@@ -28,5 +28,6 @@ public interface UserService {
     String generateJwtToken(String userName);
     UserInfo getJwtTokenInfo(String userName);
     void deleteLoginInfo(String userName);
+    String getPasswordByName(String userNanme);
 
 }

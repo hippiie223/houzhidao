@@ -7,7 +7,7 @@ public class UserInfo {
 
     private Integer id;
 
-    private String gender;
+    private Boolean gender;
 
     private String email;
 
@@ -15,7 +15,7 @@ public class UserInfo {
 
     private String job;
 
-    private String school;
+    private String organize;
 
     private String signature;
 
@@ -49,11 +49,11 @@ public class UserInfo {
         this.id = id;
     }
 
-    public String getGender() {
+    public Boolean getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 
@@ -81,12 +81,12 @@ public class UserInfo {
         this.job = job;
     }
 
-    public String getSchool() {
-        return school;
+    public String getOrganize() {
+        return organize;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setOrganize(String organize) {
+        this.organize = organize;
     }
 
     public String getSignature() {

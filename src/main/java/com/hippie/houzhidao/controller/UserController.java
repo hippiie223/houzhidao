@@ -3,6 +3,7 @@ package com.hippie.houzhidao.controller;
 import com.hippie.houzhidao.domain.UserInfo;
 import com.hippie.houzhidao.message.SendCode;
 import com.hippie.houzhidao.request.InsertUserRequestBody;
+import com.hippie.houzhidao.request.LoginRequestBody;
 import com.hippie.houzhidao.request.UpdateUserInfoRequestBody;
 import com.hippie.houzhidao.respbody.CodeRespBody;
 import com.hippie.houzhidao.respbody.RootRespBody;
@@ -21,8 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -88,21 +87,53 @@ public class UserController {
 
     @PostMapping(path = "/login")
     @ApiOperation("用户登录")
-    public RootRespBody<String> login(@RequestParam String userName, @RequestParam String password, HttpServletRequest request, HttpServletResponse response){
+    public RootRespBody<String> login(@RequestBody LoginRequestBody requestBody){
         Subject subject = SecurityUtils.getSubject();
         try {
-            UsernamePasswordToken token = new UsernamePasswordToken(userName, CheckSumBuilder.getMD5(password));
+            UsernamePasswordToken token = new UsernamePasswordToken(requestBody.getUserName(), CheckSumBuilder.getMD5(requestBody.getPassword()));
             subject.login(token);
 
             UserInfo userInfo = (UserInfo)subject.getPrincipal();
             String newToken = userService.generateJwtToken(userInfo.getUserName());
-            response.setHeader("x-token", newToken);
+//            response.setHeader("x-token", newToken);
             return RootRespBody.success(newToken);
         } catch (AuthenticationException e){
             return RootRespBody.failure(RootRespBody.Status.BAD_REQUEST,"密码错误");
         } catch (Exception e){
             return RootRespBody.failure(RootRespBody.Status.PERMISSION_DENIED_ERROR, e.toString());
         }
+    }
+
+    @PostMapping(path = "/login/code")
+    @ApiOperation("根据验证码登录")
+    public RootRespBody<String> loginByCode(@RequestBody LoginRequestBody requestBody){
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            UsernamePasswordToken token = new UsernamePasswordToken(requestBody.getUserName(), userService.getPasswordByName(requestBody.getUserName()));
+            subject.login(token);
+
+            UserInfo userInfo = (UserInfo)subject.getPrincipal();
+            String newToken = userService.generateJwtToken(userInfo.getUserName());
+//            response.setHeader("x-token", newToken);
+            return RootRespBody.success(newToken);
+        } catch (AuthenticationException e){
+            return RootRespBody.failure(RootRespBody.Status.BAD_REQUEST,"密码错误");
+        } catch (Exception e){
+            return RootRespBody.failure(RootRespBody.Status.PERMISSION_DENIED_ERROR, e.toString());
+        }
+
+    }
+
+    @PostMapping(path = "/logout")
+    @ApiOperation("登出")
+    public RootRespBody<String> logout(){
+        Subject subject = SecurityUtils.getSubject();
+        if(subject.getPrincipals() != null){
+            UserInfo userInfo = (UserInfo) subject.getPrincipals().getPrimaryPrincipal();
+            userService.deleteLoginInfo(userInfo.getUserName());
+        }
+        SecurityUtils.getSubject().logout();
+        return RootRespBody.success();
     }
 
     @GetMapping(path = "/is/username/exist")

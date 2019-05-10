@@ -87,8 +87,8 @@ public class ShiroConfig {
     @Bean
     protected ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
-        chainDefinition.addPathDefinition("/admin/login", "anon");
-        chainDefinition.addPathDefinition("/admin/logout", "noSessionCreation,anon");
+        chainDefinition.addPathDefinition("/login", "anon");
+        chainDefinition.addPathDefinition("/logout", "noSessionCreation,anon");
         chainDefinition.addPathDefinition("/swagger-resources/**", "anon");
 //        chainDefinition.addPathDefinition("/image/**", "anon");
 //        chainDefinition.addPathDefinition("/admin/**", "noSessionCreation,authcToken,anyRole[admin,manager]"); //只允许admin或manager角色的用户访问

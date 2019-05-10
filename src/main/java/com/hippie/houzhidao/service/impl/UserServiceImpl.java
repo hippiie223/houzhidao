@@ -113,8 +113,8 @@ public class UserServiceImpl implements UserService {
         if(requestBody.getJob() != null){
             userInfo.setJob(requestBody.getJob());
         }
-        if(requestBody.getSchool() != null){
-            userInfo.setSchool(requestBody.getSchool());
+        if(requestBody.getOrganize() != null){
+            userInfo.setOrganize(requestBody.getOrganize());
         }
         if(requestBody.getSignature() != null){
             userInfo.setSignature(requestBody.getSignature());
@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
         userInfoRespBody.setEmail(userInfo.getEmail());
         userInfoRespBody.setGender(userInfo.getGender());
         userInfoRespBody.setJob(userInfo.getJob());
-        userInfoRespBody.setSchool(userInfo.getSchool());
+        userInfoRespBody.setOrganize(userInfo.getOrganize());
         userInfoRespBody.setSignature(userInfo.getSignature());
         userInfoRespBody.setFocusNum(focusNum);
         userInfoRespBody.setFansNum(fansNum);
@@ -218,5 +218,12 @@ public class UserServiceImpl implements UserService {
 //        userInfo.setSalt("");
 //        userInfoMapper.updateByExampleSelective(userInfo, example);
         extMapper.updateUserSalt(userName);
+    }
+
+    @Override
+    public String getPasswordByName(String userNanme) {
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample.createCriteria().andUserNameEqualTo(userNanme);
+        return userInfoMapper.selectByExample(userInfoExample).get(0).getPassword();
     }
 }

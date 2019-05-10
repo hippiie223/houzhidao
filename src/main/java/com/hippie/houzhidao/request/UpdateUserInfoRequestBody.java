@@ -12,7 +12,7 @@ public class UpdateUserInfoRequestBody {
 
     private String userName;
 
-    private String gender;
+    private Boolean gender;
 
     private String phone;
 
@@ -22,7 +22,7 @@ public class UpdateUserInfoRequestBody {
 
     private String job;
 
-    private String school;
+    private String organize;
 
     private String signature;
 
@@ -40,14 +40,6 @@ public class UpdateUserInfoRequestBody {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getPhone() {
@@ -82,12 +74,20 @@ public class UpdateUserInfoRequestBody {
         this.job = job;
     }
 
-    public String getSchool() {
-        return school;
+    public Boolean getGender() {
+        return gender;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getOrganize() {
+        return organize;
+    }
+
+    public void setOrganize(String organize) {
+        this.organize = organize;
     }
 
     public String getSignature() {

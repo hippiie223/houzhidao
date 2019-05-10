@@ -54,6 +54,8 @@ public class TopicServiceImpl implements TopicService {
             topicRespBody.setReviewNum(topicDTO.getReviewNum());
             topicRespBody.setViewNum(topicDTO.getViewNum());
             topicRespBody.setCreateTime(TimeUtil.getTime(topicDTO.getCreateTime()));
+            topicRespBody.setStartTime(TimeUtil.getTime(topicDTO.getStartTime()));
+            topicRespBody.setEndTime(TimeUtil.getTime(topicDTO.getEndTime()));
             return topicRespBody;
         }).collect(Collectors.toList());
     }
@@ -70,6 +72,8 @@ public class TopicServiceImpl implements TopicService {
             topicRespBody.setReviewNum(topicDTO.getReviewNum());
             topicRespBody.setViewNum(topicDTO.getViewNum());
             topicRespBody.setCreateTime(TimeUtil.getTime(topicDTO.getCreateTime()));
+            topicRespBody.setStartTime(TimeUtil.getTime(topicDTO.getStartTime()));
+            topicRespBody.setEndTime(TimeUtil.getTime(topicDTO.getEndTime()));
             return topicRespBody;
         }).collect(Collectors.toList());
     }
@@ -86,6 +90,8 @@ public class TopicServiceImpl implements TopicService {
             topicRespBody.setReviewNum(topicDTO.getReviewNum());
             topicRespBody.setViewNum(topicDTO.getViewNum());
             topicRespBody.setCreateTime(TimeUtil.getTime(topicDTO.getCreateTime()));
+            topicRespBody.setStartTime(TimeUtil.getTime(topicDTO.getStartTime()));
+            topicRespBody.setEndTime(TimeUtil.getTime(topicDTO.getEndTime()));
             return topicRespBody;
         }).collect(Collectors.toList());
 

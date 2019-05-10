@@ -245,62 +245,52 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andGenderEqualTo(String value) {
+        public Criteria andGenderEqualTo(Boolean value) {
             addCriterion("gender =", value, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderNotEqualTo(String value) {
+        public Criteria andGenderNotEqualTo(Boolean value) {
             addCriterion("gender <>", value, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderGreaterThan(String value) {
+        public Criteria andGenderGreaterThan(Boolean value) {
             addCriterion("gender >", value, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderGreaterThanOrEqualTo(String value) {
+        public Criteria andGenderGreaterThanOrEqualTo(Boolean value) {
             addCriterion("gender >=", value, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderLessThan(String value) {
+        public Criteria andGenderLessThan(Boolean value) {
             addCriterion("gender <", value, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderLessThanOrEqualTo(String value) {
+        public Criteria andGenderLessThanOrEqualTo(Boolean value) {
             addCriterion("gender <=", value, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderLike(String value) {
-            addCriterion("gender like", value, "gender");
-            return (Criteria) this;
-        }
-
-        public Criteria andGenderNotLike(String value) {
-            addCriterion("gender not like", value, "gender");
-            return (Criteria) this;
-        }
-
-        public Criteria andGenderIn(List<String> values) {
+        public Criteria andGenderIn(List<Boolean> values) {
             addCriterion("gender in", values, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderNotIn(List<String> values) {
+        public Criteria andGenderNotIn(List<Boolean> values) {
             addCriterion("gender not in", values, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderBetween(String value1, String value2) {
+        public Criteria andGenderBetween(Boolean value1, Boolean value2) {
             addCriterion("gender between", value1, value2, "gender");
             return (Criteria) this;
         }
 
-        public Criteria andGenderNotBetween(String value1, String value2) {
+        public Criteria andGenderNotBetween(Boolean value1, Boolean value2) {
             addCriterion("gender not between", value1, value2, "gender");
             return (Criteria) this;
         }
@@ -515,73 +505,73 @@ public class UserInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andSchoolIsNull() {
-            addCriterion("school is null");
+        public Criteria andOrganizeIsNull() {
+            addCriterion("organize is null");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolIsNotNull() {
-            addCriterion("school is not null");
+        public Criteria andOrganizeIsNotNull() {
+            addCriterion("organize is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolEqualTo(String value) {
-            addCriterion("school =", value, "school");
+        public Criteria andOrganizeEqualTo(String value) {
+            addCriterion("organize =", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotEqualTo(String value) {
-            addCriterion("school <>", value, "school");
+        public Criteria andOrganizeNotEqualTo(String value) {
+            addCriterion("organize <>", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolGreaterThan(String value) {
-            addCriterion("school >", value, "school");
+        public Criteria andOrganizeGreaterThan(String value) {
+            addCriterion("organize >", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolGreaterThanOrEqualTo(String value) {
-            addCriterion("school >=", value, "school");
+        public Criteria andOrganizeGreaterThanOrEqualTo(String value) {
+            addCriterion("organize >=", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolLessThan(String value) {
-            addCriterion("school <", value, "school");
+        public Criteria andOrganizeLessThan(String value) {
+            addCriterion("organize <", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolLessThanOrEqualTo(String value) {
-            addCriterion("school <=", value, "school");
+        public Criteria andOrganizeLessThanOrEqualTo(String value) {
+            addCriterion("organize <=", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolLike(String value) {
-            addCriterion("school like", value, "school");
+        public Criteria andOrganizeLike(String value) {
+            addCriterion("organize like", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotLike(String value) {
-            addCriterion("school not like", value, "school");
+        public Criteria andOrganizeNotLike(String value) {
+            addCriterion("organize not like", value, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolIn(List<String> values) {
-            addCriterion("school in", values, "school");
+        public Criteria andOrganizeIn(List<String> values) {
+            addCriterion("organize in", values, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotIn(List<String> values) {
-            addCriterion("school not in", values, "school");
+        public Criteria andOrganizeNotIn(List<String> values) {
+            addCriterion("organize not in", values, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolBetween(String value1, String value2) {
-            addCriterion("school between", value1, value2, "school");
+        public Criteria andOrganizeBetween(String value1, String value2) {
+            addCriterion("organize between", value1, value2, "organize");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotBetween(String value1, String value2) {
-            addCriterion("school not between", value1, value2, "school");
+        public Criteria andOrganizeNotBetween(String value1, String value2) {
+            addCriterion("organize not between", value1, value2, "organize");
             return (Criteria) this;
         }
 
